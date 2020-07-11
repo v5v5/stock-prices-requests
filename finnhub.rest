@@ -1,0 +1,35 @@
+@ticker = EPAM
+@apikey = {{apikey_finnhub}}
+# @from = 1420070400
+# @to = 1609459200
+
+###
+GET https://showcase.api.linx.twenty57.net/UnixTime/tounix
+    ?date={{$localDatetime iso8601}}
+###
+# @name dateFrom
+GET https://showcase.api.linx.twenty57.net/UnixTime/tounix
+    ?date={{$localDatetime iso8601 -1 y}}
+###
+# @name dateTo
+GET https://showcase.api.linx.twenty57.net/UnixTime/tounix
+    ?date={{$localDatetime iso8601}}
+###
+# @name datetimeFrom
+GET https://showcase.api.linx.twenty57.net/UnixTime/tounixtimestamp
+    ?datetime={{$localDatetime iso8601 -1 y}}
+###
+# @name datetimeTo
+GET https://showcase.api.linx.twenty57.net/UnixTime/tounixtimestamp
+    ?datetime=now
+###
+GET https://finnhub.io/api/v1/stock/candle
+    ?symbol={{ticker}}
+    &resolution=D
+    # &from={{dateFrom.response.body.*}}
+    &from={{datetimeFrom.response.body.UnixTimeStamp}}
+    # &to={{dateTo.response.body.*}}
+    &to={{datetimeTo.response.body.UnixTimeStamp}}
+    &token={{apikey}}
+
+

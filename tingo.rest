@@ -1,0 +1,14 @@
+@ticker = epam
+# @format = json
+@format = csv
+
+GET https://api.tiingo.com/tiingo/daily/{{ticker}}
+    ?token={{apitoken_tingo}}
+###
+https://api.tiingo.com/tiingo/daily/{{ticker}}/prices
+    ?startDate={{$localDatetime iso8601 -5 y}}
+    &endDate={{$localDatetime iso8601}}
+    &format=csv
+    &resampleFreq=daily
+    &format={{format}}
+    &token={{apitoken_tingo}}
